@@ -16,6 +16,7 @@ public class JSONSchemaValidator {
         baseURI = "https://reqres.in/api";
         given().get("/users?page=2").then()
                 .assertThat()
+                //match the schema with the json present in the file in our local(expected) against the uri(actual)
                 .body(matchesJsonSchemaInClasspath("schema.json.txt"))
                 .statusCode(200)
                 .body("data[4].first_name", equalTo("George"))
