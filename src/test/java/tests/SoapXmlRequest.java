@@ -11,12 +11,13 @@ import java.nio.charset.StandardCharsets;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class SoapXmlRequest {
 
     // soap web services
 
-    //    @Test
+//    @Test
     public void validateSoapRequest() throws Exception {
 
         File file = new File("./soapRequest/Add.xml");
@@ -28,7 +29,9 @@ public class SoapXmlRequest {
                 .accept(ContentType.XML)
                 .body(requestBody)
                 .when().post("/calculator.asmx")
-                .then().statusCode(200).log().all();
+                .then().statusCode(200).log().all()
+                //validate soap response body
+                .and().body("//*:AddResult.text()", equalTo("10"));
 
     }
 
@@ -42,6 +45,8 @@ public class SoapXmlRequest {
         given().contentType("text/xml").accept(ContentType.XML)
                 .body(requestBody)
                 .when().post("/faculty/fawcett/Handouts/cse775/code/calcWebService/Calc.asmx")
-                .then().statusCode(200).log().all();
+                .then().statusCode(200).log().all()
+                //validate soap response body
+                .and().body("//*:SubtractResult.text()", equalTo("-5"));
     }
 }
