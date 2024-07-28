@@ -16,6 +16,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class SoapXmlRequest {
 
     // soap web services
+    // https://www.freeformatter.com/xpath-tester.html#before-output - xml xpath finder
 
 //    @Test
     public void validateSoapRequest() throws Exception {
